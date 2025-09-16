@@ -12,14 +12,20 @@ export declare class TrpcRouter {
         ctx: object;
         meta: object;
         errorShape: import("@trpc/server").DefaultErrorShape;
-        transformer: import("@trpc/server").DefaultDataTransformer;
+        transformer: {
+            serialize: (object: any) => any;
+            deserialize: (object: any) => any;
+        };
     }>, {
         list: import("@trpc/server").BuildProcedure<"query", {
             _config: import("@trpc/server").RootConfig<{
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -49,7 +55,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -70,7 +79,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -101,7 +113,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -136,7 +151,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -150,14 +168,20 @@ export declare class TrpcRouter {
         ctx: object;
         meta: object;
         errorShape: import("@trpc/server").DefaultErrorShape;
-        transformer: import("@trpc/server").DefaultDataTransformer;
+        transformer: {
+            serialize: (object: any) => any;
+            deserialize: (object: any) => any;
+        };
     }>, {
         list: import("@trpc/server").BuildProcedure<"query", {
             _config: import("@trpc/server").RootConfig<{
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -191,7 +215,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -216,7 +243,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -257,7 +287,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -302,7 +335,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -316,7 +352,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -334,7 +373,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _ctx_out: object;
             _input_in: typeof import("@trpc/server").unsetMarker;
@@ -348,7 +390,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -366,7 +411,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _ctx_out: object;
             _input_in: typeof import("@trpc/server").unsetMarker;
@@ -383,14 +431,20 @@ export declare class TrpcRouter {
         ctx: object;
         meta: object;
         errorShape: import("@trpc/server").DefaultErrorShape;
-        transformer: import("@trpc/server").DefaultDataTransformer;
+        transformer: {
+            serialize: (object: any) => any;
+            deserialize: (object: any) => any;
+        };
     }>, {
         list: import("@trpc/server").BuildProcedure<"query", {
             _config: import("@trpc/server").RootConfig<{
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -436,7 +490,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -467,7 +524,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -510,7 +570,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -524,14 +587,20 @@ export declare class TrpcRouter {
         ctx: object;
         meta: object;
         errorShape: import("@trpc/server").DefaultErrorShape;
-        transformer: import("@trpc/server").DefaultDataTransformer;
+        transformer: {
+            serialize: (object: any) => any;
+            deserialize: (object: any) => any;
+        };
     }>, {
         getMpArticles: import("@trpc/server").BuildProcedure<"mutation", {
             _config: import("@trpc/server").RootConfig<{
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -549,7 +618,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -573,7 +645,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _ctx_out: object;
             _input_in: typeof import("@trpc/server").unsetMarker;
@@ -590,7 +665,10 @@ export declare class TrpcRouter {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _meta: object;
             _ctx_out: object;
@@ -613,20 +691,29 @@ export declare class TrpcRouter {
         ctx: object;
         meta: object;
         errorShape: import("@trpc/server").DefaultErrorShape;
-        transformer: import("@trpc/server").DefaultDataTransformer;
+        transformer: {
+            serialize: (object: any) => any;
+            deserialize: (object: any) => any;
+        };
     }>, {
         feed: import("@trpc/server").CreateRouterInner<import("@trpc/server").RootConfig<{
             ctx: object;
             meta: object;
             errorShape: import("@trpc/server").DefaultErrorShape;
-            transformer: import("@trpc/server").DefaultDataTransformer;
+            transformer: {
+                serialize: (object: any) => any;
+                deserialize: (object: any) => any;
+            };
         }>, {
             list: import("@trpc/server").BuildProcedure<"query", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -660,7 +747,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -685,7 +775,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -726,7 +819,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -771,7 +867,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -785,7 +884,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -803,7 +905,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _ctx_out: object;
                 _input_in: typeof import("@trpc/server").unsetMarker;
@@ -817,7 +922,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -835,7 +943,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _ctx_out: object;
                 _input_in: typeof import("@trpc/server").unsetMarker;
@@ -852,14 +963,20 @@ export declare class TrpcRouter {
             ctx: object;
             meta: object;
             errorShape: import("@trpc/server").DefaultErrorShape;
-            transformer: import("@trpc/server").DefaultDataTransformer;
+            transformer: {
+                serialize: (object: any) => any;
+                deserialize: (object: any) => any;
+            };
         }>, {
             list: import("@trpc/server").BuildProcedure<"query", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -889,7 +1006,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -910,7 +1030,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -941,7 +1064,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -976,7 +1102,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -990,14 +1119,20 @@ export declare class TrpcRouter {
             ctx: object;
             meta: object;
             errorShape: import("@trpc/server").DefaultErrorShape;
-            transformer: import("@trpc/server").DefaultDataTransformer;
+            transformer: {
+                serialize: (object: any) => any;
+                deserialize: (object: any) => any;
+            };
         }>, {
             list: import("@trpc/server").BuildProcedure<"query", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -1043,7 +1178,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -1074,7 +1212,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -1117,7 +1258,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -1131,14 +1275,20 @@ export declare class TrpcRouter {
             ctx: object;
             meta: object;
             errorShape: import("@trpc/server").DefaultErrorShape;
-            transformer: import("@trpc/server").DefaultDataTransformer;
+            transformer: {
+                serialize: (object: any) => any;
+                deserialize: (object: any) => any;
+            };
         }>, {
             getMpArticles: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -1156,7 +1306,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;
@@ -1180,7 +1333,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _ctx_out: object;
                 _input_in: typeof import("@trpc/server").unsetMarker;
@@ -1197,7 +1353,10 @@ export declare class TrpcRouter {
                     ctx: object;
                     meta: object;
                     errorShape: import("@trpc/server").DefaultErrorShape;
-                    transformer: import("@trpc/server").DefaultDataTransformer;
+                    transformer: {
+                        serialize: (object: any) => any;
+                        deserialize: (object: any) => any;
+                    };
                 }>;
                 _meta: object;
                 _ctx_out: object;

@@ -20,7 +20,18 @@ const blockedAccountsMap = new Map<string, string[]>();
 
 @Injectable()
 export class TrpcService {
-  trpc = initTRPC.create();
+  trpc = initTRPC.create({
+    transformer: {
+      serialize: (object) => {
+        // 确保序列化时使用UTF-8编码
+        return JSON.parse(JSON.stringify(object));
+      },
+      deserialize: (object) => {
+        // 确保反序列化时使用UTF-8编码
+        return JSON.parse(JSON.stringify(object));
+      },
+    },
+  });
   publicProcedure = this.trpc.procedure;
   protectedProcedure = this.trpc.procedure.use(({ ctx, next }) => {
     // 移除授权码验证，由前端统一处理

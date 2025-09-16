@@ -11,14 +11,20 @@ export declare class TrpcService {
             ctx: object;
             meta: object;
             errorShape: import("@trpc/server").DefaultErrorShape;
-            transformer: import("@trpc/server").DefaultDataTransformer;
+            transformer: {
+                serialize: (object: any) => any;
+                deserialize: (object: any) => any;
+            };
         }>;
         procedure: import("@trpc/server").ProcedureBuilder<{
             _config: import("@trpc/server").RootConfig<{
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _ctx_out: object;
             _input_in: typeof import("@trpc/server").unsetMarker;
@@ -32,7 +38,10 @@ export declare class TrpcService {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _ctx_out: {};
             _input_out: typeof import("@trpc/server").unsetMarker;
@@ -45,7 +54,10 @@ export declare class TrpcService {
                 ctx: object;
                 meta: object;
                 errorShape: import("@trpc/server").DefaultErrorShape;
-                transformer: import("@trpc/server").DefaultDataTransformer;
+                transformer: {
+                    serialize: (object: any) => any;
+                    deserialize: (object: any) => any;
+                };
             }>;
             _ctx_out: {};
             _input_out: typeof import("@trpc/server").unsetMarker;
@@ -58,14 +70,20 @@ export declare class TrpcService {
             ctx: object;
             meta: object;
             errorShape: import("@trpc/server").DefaultErrorShape;
-            transformer: import("@trpc/server").DefaultDataTransformer;
+            transformer: {
+                serialize: (object: any) => any;
+                deserialize: (object: any) => any;
+            };
         }>, TProcRouterRecord>;
         mergeRouters: typeof import("@trpc/server").mergeRouters;
         createCallerFactory: <TRouter extends import("@trpc/server").Router<import("@trpc/server").AnyRouterDef<import("@trpc/server").RootConfig<{
             ctx: object;
             meta: object;
             errorShape: import("@trpc/server").DefaultErrorShape;
-            transformer: import("@trpc/server").DefaultDataTransformer;
+            transformer: {
+                serialize: (object: any) => any;
+                deserialize: (object: any) => any;
+            };
         }>, any>>>(router: TRouter) => import("@trpc/server").RouterCaller<TRouter["_def"]>;
     };
     publicProcedure: import("@trpc/server").ProcedureBuilder<{
@@ -73,7 +91,10 @@ export declare class TrpcService {
             ctx: object;
             meta: object;
             errorShape: import("@trpc/server").DefaultErrorShape;
-            transformer: import("@trpc/server").DefaultDataTransformer;
+            transformer: {
+                serialize: (object: any) => any;
+                deserialize: (object: any) => any;
+            };
         }>;
         _ctx_out: object;
         _input_in: typeof import("@trpc/server").unsetMarker;
@@ -87,7 +108,10 @@ export declare class TrpcService {
             ctx: object;
             meta: object;
             errorShape: import("@trpc/server").DefaultErrorShape;
-            transformer: import("@trpc/server").DefaultDataTransformer;
+            transformer: {
+                serialize: (object: any) => any;
+                deserialize: (object: any) => any;
+            };
         }>;
         _meta: object;
         _ctx_out: {};
@@ -100,7 +124,10 @@ export declare class TrpcService {
         ctx: object;
         meta: object;
         errorShape: import("@trpc/server").DefaultErrorShape;
-        transformer: import("@trpc/server").DefaultDataTransformer;
+        transformer: {
+            serialize: (object: any) => any;
+            deserialize: (object: any) => any;
+        };
     }>, TProcRouterRecord>;
     mergeRouters: typeof import("@trpc/server").mergeRouters;
     request: AxiosInstance;

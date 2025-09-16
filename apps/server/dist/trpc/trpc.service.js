@@ -31,7 +31,16 @@ let TrpcService = class TrpcService {
         this.prismaService = prismaService;
         this.configService = configService;
         this.feedsService = feedsService;
-        this.trpc = server_1.initTRPC.create();
+        this.trpc = server_1.initTRPC.create({
+            transformer: {
+                serialize: (object) => {
+                    return JSON.parse(JSON.stringify(object));
+                },
+                deserialize: (object) => {
+                    return JSON.parse(JSON.stringify(object));
+                },
+            },
+        });
         this.publicProcedure = this.trpc.procedure;
         this.protectedProcedure = this.trpc.procedure.use(({ ctx, next }) => {
             return next({ ctx });
