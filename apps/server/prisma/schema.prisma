@@ -1,0 +1,232 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:../data/wewe-rss.db"
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"] // 生成linux可执行文件
+}
+
+// 读书账号
+model Account {
+  id        String    @id
+  token     String    @map("token")
+  name      String    @map("name")
+  // 状态 0:失效 1:启用 2:禁用
+  status    Int       @default(1) @map("status")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @default(now()) @updatedAt @map("updated_at")
+
+  @@map("accounts")
+}
+
+// 订阅源
+model Feed {
+  id      String @id
+  mpName  String @map("mp_name")
+  mpCover String @map("mp_cover")
+  mpIntro String @map("mp_intro")
+  // 状态 0:失效 1:启用 2:禁用
+  status  Int    @default(1) @map("status")
+
+  // article最后同步时间
+  syncTime Int @default(0) @map("sync_time")
+
+  // 信息更新时间
+  updateTime Int @map("update_time")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @default(now()) @updatedAt @map("updated_at")
+
+  // 是否有历史文章 1 是  0 否
+  hasHistory Int? @default(1) @map("has_history")
+
+  @@map("feeds")
+}
+
+model Article {
+  id          String @id
+  mpId        String @map("mp_id")
+  title       String @map("title")
+  content     String? @map("content")  // 添加文章内容字段
+  picUrl      String @map("pic_url")
+  publishTime Int    @map("publish_time")
+  summary     String? @map("summary")  // 摘要
+  industry    String? @map("industry")  // 行业
+  newsType    String? @map("news_type")  // 新闻类型
+  confidence  Float? @map("confidence")  // 分类置信度
+  isDuplicate Boolean @default(false) @map("is_duplicate")  // 是否重复
+  duplicateGroupId String? @map("duplicate_group_id")  // 重复组ID
+  isProcessed Boolean @default(false) @map("is_processed")  // 是否处理完成
+  processedTime Int? @map("processed_time")  // 处理时间
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @default(now()) @updatedAt @map("updated_at")
+
+  // 关联要素抽取
+  investmentElements InvestmentElement?
+  policyElements     PolicyElement?
+  companyElements    CompanyElement?
+  techElements       TechElement?
+
+  // 关联拆分的事件
+  splitEvents SplitEvent[]
+
+  @@map("articles")
+}
+
+// 投资融资要素
+model InvestmentElement {
+  id            String  @id @default(cuid())
+  articleId     String  @unique @map("article_id")
+  round         String? @map("round")  // 轮次
+  amount        String? @map("amount")  // 金额
+  currency      String? @map("currency")  // 币种
+  valuation     String? @map("valuation")  // 估值
+  investors     String? @map("investors")  // 投资方
+  counterparty  String? @map("counterparty")  // 交易对手
+  targetCompany String? @map("target_company")  // 标的公司
+  region        String? @map("region")  // 地区
+
+  article       Article @relation(fields: [articleId], references: [id])
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @default(now()) @updatedAt @map("updated_at")
+
+  @@map("investment_elements")
+}
+
+// 政策要素
+model PolicyElement {
+  id            String  @id @default(cuid())
+  articleId     String  @unique @map("article_id")
+  issuingOrg    String? @map("issuing_org")  // 发布机构
+  documentNo    String? @map("document_no")  // 文号
+  scope         String? @map("scope")  // 适用范围/行业
+  effectiveDate String? @map("effective_date")  // 生效日期
+  keyPoints     String? @map("key_points")  // 要点条目
+
+  article       Article @relation(fields: [articleId], references: [id])
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @default(now()) @updatedAt @map("updated_at")
+
+  @@map("policy_elements")
+}
+
+// 企业动态要素
+model CompanyElement {
+  id           String  @id @default(cuid())
+  articleId    String  @unique @map("article_id")
+  companyName  String? @map("company_name")  // 公司名
+  brandProduct String? @map("brand_product")  // 品牌/产品
+  businessLine String? @map("business_line")  // 业务线
+  marketRegion String? @map("market_region")  // 市场/地区
+
+  article      Article @relation(fields: [articleId], references: [id])
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @default(now()) @updatedAt @map("updated_at")
+
+  @@map("company_elements")
+}
+
+// 技术突破要素
+model TechElement {
+  id            String  @id @default(cuid())
+  articleId     String  @unique @map("article_id")
+  direction     String? @map("direction")  // 方向
+  metrics       String? @map("metrics")  // 指标/参数
+  milestone     String? @map("milestone")  // 里程碑
+  paperPatentLink String? @map("paper_patent_link")  // 论文/专利链接
+
+  article       Article @relation(fields: [articleId], references: [id])
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @default(now()) @updatedAt @map("updated_at")
+
+  @@map("tech_elements")
+}
+
+// 拆分的事件
+model SplitEvent {
+  id          String @id @default(cuid())
+  articleId   String @map("article_id")
+  title       String @map("title")  // 事件标题
+  summary     String @map("summary")  // 事件摘要
+  originalLink String @map("original_link")  // 原始链接
+  splitIndex  Int    @map("split_index")  // 在原文中的拆分顺序
+
+  article     Article @relation(fields: [articleId], references: [id])
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @default(now()) @updatedAt @map("updated_at")
+
+  @@map("split_events")
+}
+
+// 处理任务
+model ProcessingTask {
+  id            String @id @default(cuid())
+  status        Int    @default(0) @map("status")  // 0: 待处理, 1: 处理中, 2: 完成, 3: 失败
+  startTime     Int    @map("start_time")  // 开始时间
+  endTime       Int?   @map("end_time")  // 结束时间
+  totalArticles Int    @default(0) @map("total_articles")  // 总文章数
+  processedArticles Int @default(0) @map("processed_articles")  // 已处理文章数
+  successArticles Int @default(0) @map("success_articles")  // 成功处理文章数
+  failedArticles Int @default(0) @map("failed_articles")  // 处理失败文章数
+  splitCount    Int    @default(0) @map("split_count")  // 拆分事件数
+  duplicateCount Int @default(0) @map("duplicate_count")  // 去重数量
+  filterCount   Int    @default(0) @map("filter_count")  // 过滤数量
+  errorMessage  String? @map("error_message")  // 错误信息
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @default(now()) @updatedAt @map("updated_at")
+
+  @@map("processing_tasks")
+}
+
+// 行业配置
+model Industry {
+  id        String @id @default(cuid())
+  name      String @unique @map("name")  // 行业名称
+  description String? @map("description")  // 行业描述
+  priority  Int    @default(0) @map("priority")  // 优先级
+  isActive  Boolean @default(true) @map("is_active")  // 是否启用
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @default(now()) @updatedAt @map("updated_at")
+
+  @@map("industries")
+}
+
+// 新闻类型配置
+model NewsType {
+  id        String @id @default(cuid())
+  name      String @unique @map("name")  // 类型名称
+  description String? @map("description")  // 类型描述
+  priority  Int    @default(0) @map("priority")  // 优先级
+  isActive  Boolean @default(true) @map("is_active")  // 是否启用
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @default(now()) @updatedAt @map("updated_at")
+
+  @@map("news_types")
+}
+
+// LLM配置
+model LLMConfig {
+  id        String @id @default(cuid())
+  model     String @map("model")  // 模型名称
+  apiKey    String @map("api_key")  // API密钥
+  baseUrl   String? @map("base_url")  // 基础URL
+  maxTokens Int?  @map("max_tokens")  // 最大令牌数
+  temperature Float? @map("temperature")  // 温度值
+  isActive  Boolean @default(true) @map("is_active")  // 是否启用
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @default(now()) @updatedAt @map("updated_at")
+
+  @@map("llm_configs")
+}
