@@ -128,7 +128,7 @@ const AccountPage = () => {
   }, [count, isOpen, loginResult?.vid]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4 md:p-6">
+    <div className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4 md:p-6">
       <div className="max-w-6xl mx-auto">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden mb-8">
           <div className="p-6 md:p-8">
@@ -151,7 +151,7 @@ const AccountPage = () => {
                       if (!result?.scanUrl) {
                         throw new Error('未获取到有效的二维码URL');
                       }
-                    } catch (error) {
+                    } catch (error: any) {
                       console.error('获取二维码失败:', error);
                       toast.error('获取二维码失败', {
                         description: error.message || '请检查网络连接',
@@ -251,18 +251,19 @@ const AccountPage = () => {
             // 取消所有未完成的请求
             await Promise.all([
               queryUtils.account.list.cancel(),
-              queryUtils.platform.getLoginResult.cancel()
+              (queryUtils.platform as any).getLoginResult.cancel()
             ]);
             setIsLoading(false); // 重置加载状态
             setCount(0); // 重置倒计时
           }
           onOpenChange();
         }}
-        size="2xl"
+        size="lg"
         placement="center"
         scrollBehavior="inside"
         className="rounded-2xl"
         backdrop="blur"
+        classNames={{ base: "max-w-lg w-full" }}
         motionProps={{
           variants: {
             enter: {
@@ -282,11 +283,6 @@ const AccountPage = () => {
               },
             },
           }
-        }}
-        classNames={{
-          wrapper: "!fixed !inset-0 !flex !items-center !justify-center z-[9999]",
-          backdrop: "!fixed !inset-0 z-[9998]",
-          base: "!relative !m-auto"
         }}
       >
         <ModalContent className="py-0">

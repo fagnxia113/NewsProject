@@ -241,8 +241,17 @@ ${content}
    */
   private parseAnalysisResponse(response: string): any {
     try {
+      // 清理响应内容，提取JSON部分
+      let cleanResponse = response.trim();
+      
+      // 如果响应包含代码块标记，提取其中的JSON
+      const jsonBlockMatch = cleanResponse.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
+      if (jsonBlockMatch) {
+        cleanResponse = jsonBlockMatch[1];
+      }
+      
       // 尝试解析JSON
-      const result = JSON.parse(response);
+      const result = JSON.parse(cleanResponse);
       
       // 验证必要字段
       if (!result.industry || !result.newsType) {
@@ -268,6 +277,7 @@ ${content}
       return result;
     } catch (error) {
       this.logger.error('解析分析响应失败', error);
+      this.logger.error('原始响应内容:', response);
       // 返回默认值
       return {
         industry: '其他',

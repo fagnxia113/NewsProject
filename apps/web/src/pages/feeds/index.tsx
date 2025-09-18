@@ -374,7 +374,75 @@ const Feeds = () => {
               </div>
             ) : (
               <div className="flex flex-wrap gap-2 items-center w-full">
-                <div className="flex gap-2 items-center">
+                <div className="flex items-center gap-2">
+                  {/* 全选按钮 */}
+                  <Tooltip content="全选" closeDelay={0}>
+                    <Button
+                      isIconOnly
+                      size="sm"
+                      variant="flat"
+                      onClick={() => {
+                        // 获取当前页面所有文章的ID并全选
+                        const articleListElement = document.querySelector('.article-list-container');
+                        if (articleListElement) {
+                          const articleCheckboxes = articleListElement.querySelectorAll('input[type="checkbox"]');
+                          const articleIds = Array.from(articleCheckboxes)
+                            .map(cb => cb.getAttribute('data-article-id'))
+                            .filter((id): id is string => Boolean(id)); // 过滤掉null值并确保类型安全
+                          
+                          if (selectedArticles.length === articleIds.length && articleIds.length > 0) {
+                            // 如果已经全选，则取消全选
+                            setSelectedArticles([]);
+                          } else {
+                            // 否则全选
+                            setSelectedArticles(articleIds);
+                          }
+                        }
+                      }}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                      </svg>
+                    </Button>
+                  </Tooltip>
+                  
+                  {/* 已选择数量统计 */}
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    已选: {selectedArticles.length}
+                  </span>
+                  
+                  {/* 分析新闻按钮 */}
+                  <Button
+                    color="success"
+                    variant="solid"
+                    onClick={handleAnalyzeSelected}
+                    isDisabled={selectedArticles.length === 0 || processingStatus === 'processing'}
+                    isLoading={isBatchProcessing || processingStatus === 'processing'}
+                    size="sm"
+                    className="font-medium"
+                  >
+                    分析新闻
+                  </Button>
+                  
+                  {/* 日期筛选按钮 */}
+                  <Tooltip content="按日期筛选" closeDelay={0}>
+                    <Button
+                      isIconOnly
+                      size="sm"
+                      variant="flat"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                      </svg>
+                    </Button>
+                  </Tooltip>
+                  
+                  {/* 更新全部 */}
                   <Tooltip
                     content="频繁调用可能会导致一段时间内不可用"
                     color="danger"
@@ -399,6 +467,8 @@ const Feeds = () => {
                         : '更新全部'}
                     </Link>
                   </Tooltip>
+                  
+                  {/* 导出OPML */}
                   <Link
                     href="#"
                     color="foreground"
@@ -408,22 +478,6 @@ const Feeds = () => {
                   >
                     导出OPML
                   </Link>
-                </div>
-                <div className="flex items-center gap-2 ml-auto">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    已选: {selectedArticles.length}
-                  </span>
-                  <Button
-                    color="success"
-                    variant="solid"
-                    onClick={handleAnalyzeSelected}
-                    isDisabled={selectedArticles.length === 0 || processingStatus === 'processing'}
-                    isLoading={isBatchProcessing || processingStatus === 'processing'}
-                    size="sm"
-                    className="font-medium"
-                  >
-                    分析新闻
-                  </Button>
                 </div>
               </div>
             )}
@@ -437,7 +491,7 @@ const Feeds = () => {
           </div>
         </div>
       </div>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="rounded-2xl">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="lg" classNames={{ base: "max-w-lg w-full" }} className="rounded-2xl">
         <ModalContent>
           <ModalHeader className="flex flex-col gap-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-t-2xl">
             添加公众号源

@@ -12,7 +12,6 @@ var TaskProcessor_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskProcessor = void 0;
 const common_1 = require("@nestjs/common");
-const schedule_1 = require("@nestjs/schedule");
 const prisma_service_1 = require("../prisma/prisma.service");
 const analysis_service_1 = require("./analysis.service");
 let TaskProcessor = TaskProcessor_1 = class TaskProcessor {
@@ -21,63 +20,12 @@ let TaskProcessor = TaskProcessor_1 = class TaskProcessor {
         this.prismaService = prismaService;
         this.logger = new common_1.Logger(TaskProcessor_1.name);
     }
-    async handleCron() {
-        this.logger.debug('开始执行定时分析任务');
-        try {
-            const pendingTasks = await this.prismaService.processingTask.findMany({
-                where: {
-                    status: 0,
-                },
-                orderBy: {
-                    createdAt: 'asc',
-                },
-            });
-            this.logger.debug(`找到${pendingTasks.length}个待处理的任务`);
-            for (const task of pendingTasks) {
-                try {
-                    this.logger.debug(`开始处理任务: ${task.id}`);
-                    await this.prismaService.processingTask.update({
-                        where: { id: task.id },
-                        data: { status: 1 },
-                    });
-                    await this.processBatchArticleTask(task);
-                    await this.prismaService.processingTask.update({
-                        where: { id: task.id },
-                        data: {
-                            status: 2,
-                            endTime: Math.floor(Date.now() / 1000),
-                        },
-                    });
-                    this.logger.debug(`任务处理完成: ${task.id}`);
-                }
-                catch (error) {
-                    this.logger.error(`处理任务失败: ${task.id}`, error.stack);
-                    await this.prismaService.processingTask.update({
-                        where: { id: task.id },
-                        data: {
-                            status: 3,
-                            errorMessage: error.message,
-                            endTime: Math.floor(Date.now() / 1000),
-                        },
-                    });
-                }
-            }
-            const now = new Date();
-            if (now.getHours() === 2 && now.getMinutes() < 5) {
-                await this.performDailyAnalysis();
-            }
-        }
-        catch (error) {
-            this.logger.error('执行定时任务时发生错误', error.stack);
-        }
-        this.logger.debug('定时分析任务执行完成');
-    }
     async processBatchArticleTask(task) {
         const unprocessedArticles = await this.prismaService.article.findMany({
             where: {
                 isProcessed: false
             },
-            take: task.totalArticles || 10,
+            take: task.totalArticles || 100,
             orderBy: {
                 publishTime: 'desc'
             }
@@ -114,7 +62,7 @@ let TaskProcessor = TaskProcessor_1 = class TaskProcessor {
                         filterCount++;
                     }
                 }
-                if (processedCount % 10 === 0) {
+                if (processedCount % 5 === 0 || processedCount === unprocessedArticles.length) {
                     await this.prismaService.processingTask.update({
                         where: { id: task.id },
                         data: {
@@ -126,25 +74,26 @@ let TaskProcessor = TaskProcessor_1 = class TaskProcessor {
                             filterCount: filterCount,
                         },
                     });
+                    this.logger.debug(`任务 ${task.id} 进度: ${processedCount}/${unprocessedArticles.length}`);
                 }
             }
             catch (error) {
                 this.logger.error(`处理文章失败: ${article.id}`, error);
                 processedCount++;
                 failedCount++;
+                await this.prismaService.processingTask.update({
+                    where: { id: task.id },
+                    data: {
+                        processedArticles: processedCount,
+                        successArticles: successCount,
+                        failedArticles: failedCount,
+                        splitCount: splitCount,
+                        duplicateCount: duplicateCount,
+                        filterCount: filterCount,
+                    },
+                });
             }
         }
-        await this.prismaService.processingTask.update({
-            where: { id: task.id },
-            data: {
-                processedArticles: processedCount,
-                successArticles: successCount,
-                failedArticles: failedCount,
-                splitCount: splitCount,
-                duplicateCount: duplicateCount,
-                filterCount: filterCount,
-            },
-        });
     }
     async performDailyAnalysis() {
         try {
@@ -160,12 +109,6 @@ let TaskProcessor = TaskProcessor_1 = class TaskProcessor {
     }
 };
 exports.TaskProcessor = TaskProcessor;
-__decorate([
-    (0, schedule_1.Cron)('0 * * * *'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], TaskProcessor.prototype, "handleCron", null);
 exports.TaskProcessor = TaskProcessor = TaskProcessor_1 = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [analysis_service_1.AnalysisService,

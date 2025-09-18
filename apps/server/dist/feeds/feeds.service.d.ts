@@ -30,13 +30,6 @@ export declare class FeedsService {
         content: string;
         mimeType: any;
     }>;
-    getFeedList(): Promise<{
-        id: string;
-        name: string;
-        intro: string;
-        cover: string;
-        syncTime: number;
-        updateTime: number;
-    }[]>;
+    getFeedList(): Promise<any>;
     updateFeed(id: string): Promise<void>;
 }

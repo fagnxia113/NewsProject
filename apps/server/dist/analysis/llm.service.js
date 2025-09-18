@@ -185,7 +185,12 @@ ${content}
     }
     parseAnalysisResponse(response) {
         try {
-            const result = JSON.parse(response);
+            let cleanResponse = response.trim();
+            const jsonBlockMatch = cleanResponse.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
+            if (jsonBlockMatch) {
+                cleanResponse = jsonBlockMatch[1];
+            }
+            const result = JSON.parse(cleanResponse);
             if (!result.industry || !result.newsType) {
                 throw new Error('分析结果缺少必要字段');
             }
@@ -203,6 +208,7 @@ ${content}
         }
         catch (error) {
             this.logger.error('解析分析响应失败', error);
+            this.logger.error('原始响应内容:', response);
             return {
                 industry: '其他',
                 newsType: 'company',

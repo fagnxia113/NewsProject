@@ -313,6 +313,9 @@ const analysisRouter = router({
             industry: article.industry,
             newsType: article.newsType,
             publishTime: article.publishTime,
+            isDuplicate: article.isDuplicate,
+            confidence: article.confidence,
+            processedTime: article.processedTime,
           };
         });
 
@@ -387,18 +390,30 @@ const analysisRouter = router({
     }))
     .query(async ({ input }) => {
       try {
-        // 这里简化实现，返回模拟的任务数据
+        // 从数据库获取真实的任务数据
+        const task = await prismaService.processingTask.findUnique({
+          where: { id: input.id },
+        });
+        
+        if (!task) {
+          throw new TRPCError({
+            code: 'NOT_FOUND',
+            message: '任务不存在',
+          });
+        }
+        
         return {
-          id: input.id,
-          status: 2, // 2表示已完成
-          startTime: Math.floor(Date.now() / 1000) - 3600, // 1小时前开始
-          endTime: Math.floor(Date.now() / 1000), // 刚刚结束
-          totalArticles: 100,
-          processedArticles: 100,
-          successArticles: 95,
-          failedArticles: 5,
-          splitCount: 10,
-          duplicateCount: 8,
+          id: task.id,
+          status: task.status,
+          startTime: task.startTime,
+          endTime: task.endTime,
+          totalArticles: task.totalArticles,
+          processedArticles: task.processedArticles,
+          successArticles: task.successArticles,
+          failedArticles: task.failedArticles,
+          splitCount: task.splitCount,
+          duplicateCount: task.duplicateCount,
+          filterCount: task.filterCount,
         };
       } catch (error) {
         throw new TRPCError({

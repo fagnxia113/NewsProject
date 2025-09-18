@@ -41,14 +41,8 @@ export declare class TrpcRouter {
             _output_out: typeof import("@trpc/server").unsetMarker;
         }, {
             blocks: string[];
-            items: {
-                name: string;
-                id: string;
-                status: number;
-                createdAt: Date;
-                updatedAt: Date | null;
-            }[];
-            nextCursor: string | undefined;
+            items: any;
+            nextCursor: string | null | undefined;
         }>;
         byId: import("@trpc/server").BuildProcedure<"query", {
             _config: import("@trpc/server").RootConfig<{
@@ -66,14 +60,7 @@ export declare class TrpcRouter {
             _input_out: string;
             _output_in: typeof import("@trpc/server").unsetMarker;
             _output_out: typeof import("@trpc/server").unsetMarker;
-        }, {
-            id: string;
-            token: string;
-            name: string;
-            status: number;
-            createdAt: Date;
-            updatedAt: Date | null;
-        }>;
+        }, any>;
         add: import("@trpc/server").BuildProcedure<"mutation", {
             _config: import("@trpc/server").RootConfig<{
                 ctx: object;
@@ -100,14 +87,7 @@ export declare class TrpcRouter {
             };
             _output_in: typeof import("@trpc/server").unsetMarker;
             _output_out: typeof import("@trpc/server").unsetMarker;
-        }, {
-            id: string;
-            token: string;
-            name: string;
-            status: number;
-            createdAt: Date;
-            updatedAt: Date | null;
-        }>;
+        }, any>;
         edit: import("@trpc/server").BuildProcedure<"mutation", {
             _config: import("@trpc/server").RootConfig<{
                 ctx: object;
@@ -138,14 +118,7 @@ export declare class TrpcRouter {
             };
             _output_in: typeof import("@trpc/server").unsetMarker;
             _output_out: typeof import("@trpc/server").unsetMarker;
-        }, {
-            id: string;
-            token: string;
-            name: string;
-            status: number;
-            createdAt: Date;
-            updatedAt: Date | null;
-        }>;
+        }, any>;
         delete: import("@trpc/server").BuildProcedure<"mutation", {
             _config: import("@trpc/server").RootConfig<{
                 ctx: object;
@@ -196,19 +169,8 @@ export declare class TrpcRouter {
             _output_in: typeof import("@trpc/server").unsetMarker;
             _output_out: typeof import("@trpc/server").unsetMarker;
         }, {
-            items: {
-                id: string;
-                mpName: string;
-                mpCover: string;
-                mpIntro: string;
-                status: number;
-                syncTime: number;
-                updateTime: number;
-                createdAt: Date;
-                updatedAt: Date | null;
-                hasHistory: number | null;
-            }[];
-            nextCursor: string | undefined;
+            items: any;
+            nextCursor: string | null | undefined;
         }>;
         byId: import("@trpc/server").BuildProcedure<"query", {
             _config: import("@trpc/server").RootConfig<{
@@ -226,18 +188,7 @@ export declare class TrpcRouter {
             _input_out: string;
             _output_in: typeof import("@trpc/server").unsetMarker;
             _output_out: typeof import("@trpc/server").unsetMarker;
-        }, {
-            id: string;
-            mpName: string;
-            mpCover: string;
-            mpIntro: string;
-            status: number;
-            syncTime: number;
-            updateTime: number;
-            createdAt: Date;
-            updatedAt: Date | null;
-            hasHistory: number | null;
-        }>;
+        }, any>;
         add: import("@trpc/server").BuildProcedure<"mutation", {
             _config: import("@trpc/server").RootConfig<{
                 ctx: object;
@@ -270,18 +221,7 @@ export declare class TrpcRouter {
             };
             _output_in: typeof import("@trpc/server").unsetMarker;
             _output_out: typeof import("@trpc/server").unsetMarker;
-        }, {
-            id: string;
-            mpName: string;
-            mpCover: string;
-            mpIntro: string;
-            status: number;
-            syncTime: number;
-            updateTime: number;
-            createdAt: Date;
-            updatedAt: Date | null;
-            hasHistory: number | null;
-        }>;
+        }, any>;
         edit: import("@trpc/server").BuildProcedure<"mutation", {
             _config: import("@trpc/server").RootConfig<{
                 ctx: object;
@@ -318,18 +258,7 @@ export declare class TrpcRouter {
             };
             _output_in: typeof import("@trpc/server").unsetMarker;
             _output_out: typeof import("@trpc/server").unsetMarker;
-        }, {
-            id: string;
-            mpName: string;
-            mpCover: string;
-            mpIntro: string;
-            status: number;
-            syncTime: number;
-            updateTime: number;
-            createdAt: Date;
-            updatedAt: Date | null;
-            hasHistory: number | null;
-        }>;
+        }, any>;
         delete: import("@trpc/server").BuildProcedure<"mutation", {
             _config: import("@trpc/server").RootConfig<{
                 ctx: object;
@@ -471,19 +400,8 @@ export declare class TrpcRouter {
             _output_in: typeof import("@trpc/server").unsetMarker;
             _output_out: typeof import("@trpc/server").unsetMarker;
         }, {
-            items: {
-                mpName: null;
-                industry: string | null;
-                newsType: string | null;
-                id: string;
-                mpId: string;
-                title: string;
-                content: string | null;
-                picUrl: string;
-                publishTime: number;
-                isProcessed: boolean;
-            }[];
-            nextCursor: string | undefined;
+            items: any;
+            nextCursor: string | null | undefined;
         }>;
         byId: import("@trpc/server").BuildProcedure<"query", {
             _config: import("@trpc/server").RootConfig<{
@@ -501,24 +419,7 @@ export declare class TrpcRouter {
             _input_out: string;
             _output_in: typeof import("@trpc/server").unsetMarker;
             _output_out: typeof import("@trpc/server").unsetMarker;
-        }, {
-            id: string;
-            mpId: string;
-            title: string;
-            content: string | null;
-            picUrl: string;
-            publishTime: number;
-            summary: string | null;
-            industry: string | null;
-            newsType: string | null;
-            confidence: number | null;
-            isDuplicate: boolean;
-            duplicateGroupId: string | null;
-            isProcessed: boolean;
-            processedTime: number | null;
-            createdAt: Date;
-            updatedAt: Date | null;
-        }>;
+        }, any>;
         add: import("@trpc/server").BuildProcedure<"mutation", {
             _config: import("@trpc/server").RootConfig<{
                 ctx: object;
@@ -547,24 +448,7 @@ export declare class TrpcRouter {
             };
             _output_in: typeof import("@trpc/server").unsetMarker;
             _output_out: typeof import("@trpc/server").unsetMarker;
-        }, {
-            id: string;
-            mpId: string;
-            title: string;
-            content: string | null;
-            picUrl: string;
-            publishTime: number;
-            summary: string | null;
-            industry: string | null;
-            newsType: string | null;
-            confidence: number | null;
-            isDuplicate: boolean;
-            duplicateGroupId: string | null;
-            isProcessed: boolean;
-            processedTime: number | null;
-            createdAt: Date;
-            updatedAt: Date | null;
-        }>;
+        }, any>;
         delete: import("@trpc/server").BuildProcedure<"mutation", {
             _config: import("@trpc/server").RootConfig<{
                 ctx: object;
@@ -728,19 +612,8 @@ export declare class TrpcRouter {
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
             }, {
-                items: {
-                    id: string;
-                    mpName: string;
-                    mpCover: string;
-                    mpIntro: string;
-                    status: number;
-                    syncTime: number;
-                    updateTime: number;
-                    createdAt: Date;
-                    updatedAt: Date | null;
-                    hasHistory: number | null;
-                }[];
-                nextCursor: string | undefined;
+                items: any;
+                nextCursor: string | null | undefined;
             }>;
             byId: import("@trpc/server").BuildProcedure<"query", {
                 _config: import("@trpc/server").RootConfig<{
@@ -758,18 +631,7 @@ export declare class TrpcRouter {
                 _input_out: string;
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
-            }, {
-                id: string;
-                mpName: string;
-                mpCover: string;
-                mpIntro: string;
-                status: number;
-                syncTime: number;
-                updateTime: number;
-                createdAt: Date;
-                updatedAt: Date | null;
-                hasHistory: number | null;
-            }>;
+            }, any>;
             add: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
@@ -802,18 +664,7 @@ export declare class TrpcRouter {
                 };
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
-            }, {
-                id: string;
-                mpName: string;
-                mpCover: string;
-                mpIntro: string;
-                status: number;
-                syncTime: number;
-                updateTime: number;
-                createdAt: Date;
-                updatedAt: Date | null;
-                hasHistory: number | null;
-            }>;
+            }, any>;
             edit: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
@@ -850,18 +701,7 @@ export declare class TrpcRouter {
                 };
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
-            }, {
-                id: string;
-                mpName: string;
-                mpCover: string;
-                mpIntro: string;
-                status: number;
-                syncTime: number;
-                updateTime: number;
-                createdAt: Date;
-                updatedAt: Date | null;
-                hasHistory: number | null;
-            }>;
+            }, any>;
             delete: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
@@ -992,14 +832,8 @@ export declare class TrpcRouter {
                 _output_out: typeof import("@trpc/server").unsetMarker;
             }, {
                 blocks: string[];
-                items: {
-                    name: string;
-                    id: string;
-                    status: number;
-                    createdAt: Date;
-                    updatedAt: Date | null;
-                }[];
-                nextCursor: string | undefined;
+                items: any;
+                nextCursor: string | null | undefined;
             }>;
             byId: import("@trpc/server").BuildProcedure<"query", {
                 _config: import("@trpc/server").RootConfig<{
@@ -1017,14 +851,7 @@ export declare class TrpcRouter {
                 _input_out: string;
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
-            }, {
-                id: string;
-                token: string;
-                name: string;
-                status: number;
-                createdAt: Date;
-                updatedAt: Date | null;
-            }>;
+            }, any>;
             add: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
@@ -1051,14 +878,7 @@ export declare class TrpcRouter {
                 };
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
-            }, {
-                id: string;
-                token: string;
-                name: string;
-                status: number;
-                createdAt: Date;
-                updatedAt: Date | null;
-            }>;
+            }, any>;
             edit: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
@@ -1089,14 +909,7 @@ export declare class TrpcRouter {
                 };
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
-            }, {
-                id: string;
-                token: string;
-                name: string;
-                status: number;
-                createdAt: Date;
-                updatedAt: Date | null;
-            }>;
+            }, any>;
             delete: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
@@ -1159,19 +972,8 @@ export declare class TrpcRouter {
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
             }, {
-                items: {
-                    mpName: null;
-                    industry: string | null;
-                    newsType: string | null;
-                    id: string;
-                    mpId: string;
-                    title: string;
-                    content: string | null;
-                    picUrl: string;
-                    publishTime: number;
-                    isProcessed: boolean;
-                }[];
-                nextCursor: string | undefined;
+                items: any;
+                nextCursor: string | null | undefined;
             }>;
             byId: import("@trpc/server").BuildProcedure<"query", {
                 _config: import("@trpc/server").RootConfig<{
@@ -1189,24 +991,7 @@ export declare class TrpcRouter {
                 _input_out: string;
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
-            }, {
-                id: string;
-                mpId: string;
-                title: string;
-                content: string | null;
-                picUrl: string;
-                publishTime: number;
-                summary: string | null;
-                industry: string | null;
-                newsType: string | null;
-                confidence: number | null;
-                isDuplicate: boolean;
-                duplicateGroupId: string | null;
-                isProcessed: boolean;
-                processedTime: number | null;
-                createdAt: Date;
-                updatedAt: Date | null;
-            }>;
+            }, any>;
             add: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
@@ -1235,24 +1020,7 @@ export declare class TrpcRouter {
                 };
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
-            }, {
-                id: string;
-                mpId: string;
-                title: string;
-                content: string | null;
-                picUrl: string;
-                publishTime: number;
-                summary: string | null;
-                industry: string | null;
-                newsType: string | null;
-                confidence: number | null;
-                isDuplicate: boolean;
-                duplicateGroupId: string | null;
-                isProcessed: boolean;
-                processedTime: number | null;
-                createdAt: Date;
-                updatedAt: Date | null;
-            }>;
+            }, any>;
             delete: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
@@ -1491,15 +1259,7 @@ export declare class TrpcRouter {
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
             }, {
-                data: {
-                    id: string;
-                    title: string;
-                    mpName: any;
-                    mpCover: any;
-                    industry: string | null;
-                    newsType: string | null;
-                    publishTime: number;
-                }[];
+                data: any;
                 total: number;
                 page: number;
                 pageSize: number;
@@ -1544,16 +1304,17 @@ export declare class TrpcRouter {
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
             }, {
-                id: string;
-                status: number;
-                startTime: number;
-                endTime: number;
-                totalArticles: number;
-                processedArticles: number;
-                successArticles: number;
-                failedArticles: number;
-                splitCount: number;
-                duplicateCount: number;
+                id: any;
+                status: any;
+                startTime: any;
+                endTime: any;
+                totalArticles: any;
+                processedArticles: any;
+                successArticles: any;
+                failedArticles: any;
+                splitCount: any;
+                duplicateCount: any;
+                filterCount: any;
             }>;
             getArticle: import("@trpc/server").BuildProcedure<"query", {
                 _config: import("@trpc/server").RootConfig<{
@@ -1573,15 +1334,15 @@ export declare class TrpcRouter {
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
             }, {
-                id: string;
-                title: string;
-                content: string | null;
-                mpName: string | undefined;
-                mpCover: string | undefined;
-                industry: string | null;
-                newsType: string | null;
-                publishTime: number;
-                isProcessed: boolean;
+                id: any;
+                title: any;
+                content: any;
+                mpName: any;
+                mpCover: any;
+                industry: any;
+                newsType: any;
+                publishTime: any;
+                isProcessed: any;
             }>;
             getArticleAnalysis: import("@trpc/server").BuildProcedure<"query", {
                 _config: import("@trpc/server").RootConfig<{
@@ -1805,15 +1566,7 @@ export declare class TrpcRouter {
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
                 _meta: object;
-            }, {
-                id: string;
-                name: string;
-                description: string | null;
-                priority: number;
-                isActive: boolean;
-                createdAt: Date;
-                updatedAt: Date | null;
-            }[]>;
+            }, any>;
             createIndustry: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
@@ -1837,15 +1590,7 @@ export declare class TrpcRouter {
                 };
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
-            }, {
-                id: string;
-                name: string;
-                description: string | null;
-                priority: number;
-                isActive: boolean;
-                createdAt: Date;
-                updatedAt: Date | null;
-            }>;
+            }, any>;
             updateIndustry: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
@@ -1875,15 +1620,7 @@ export declare class TrpcRouter {
                 };
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
-            }, {
-                id: string;
-                name: string;
-                description: string | null;
-                priority: number;
-                isActive: boolean;
-                createdAt: Date;
-                updatedAt: Date | null;
-            }>;
+            }, any>;
             deleteIndustry: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
@@ -1913,15 +1650,7 @@ export declare class TrpcRouter {
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
                 _meta: object;
-            }, {
-                id: string;
-                name: string;
-                description: string | null;
-                priority: number;
-                isActive: boolean;
-                createdAt: Date;
-                updatedAt: Date | null;
-            }[]>;
+            }, any>;
             createNewsType: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
@@ -1945,15 +1674,7 @@ export declare class TrpcRouter {
                 };
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
-            }, {
-                id: string;
-                name: string;
-                description: string | null;
-                priority: number;
-                isActive: boolean;
-                createdAt: Date;
-                updatedAt: Date | null;
-            }>;
+            }, any>;
             updateNewsType: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
@@ -1983,15 +1704,7 @@ export declare class TrpcRouter {
                 };
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
-            }, {
-                id: string;
-                name: string;
-                description: string | null;
-                priority: number;
-                isActive: boolean;
-                createdAt: Date;
-                updatedAt: Date | null;
-            }>;
+            }, any>;
             deleteNewsType: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
@@ -2021,17 +1734,7 @@ export declare class TrpcRouter {
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
                 _meta: object;
-            }, {
-                id: string;
-                model: string;
-                apiKey: string;
-                baseUrl: string | null;
-                maxTokens: number | null;
-                temperature: number | null;
-                isActive: boolean;
-                createdAt: Date;
-                updatedAt: Date | null;
-            }[]>;
+            }, any>;
             createLLMConfig: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
@@ -2059,17 +1762,7 @@ export declare class TrpcRouter {
                 };
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
-            }, {
-                id: string;
-                model: string;
-                apiKey: string;
-                baseUrl: string | null;
-                maxTokens: number | null;
-                temperature: number | null;
-                isActive: boolean;
-                createdAt: Date;
-                updatedAt: Date | null;
-            }>;
+            }, any>;
             updateLLMConfig: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;
@@ -2103,17 +1796,7 @@ export declare class TrpcRouter {
                 };
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
-            }, {
-                id: string;
-                model: string;
-                apiKey: string;
-                baseUrl: string | null;
-                maxTokens: number | null;
-                temperature: number | null;
-                isActive: boolean;
-                createdAt: Date;
-                updatedAt: Date | null;
-            }>;
+            }, any>;
             deleteLLMConfig: import("@trpc/server").BuildProcedure<"mutation", {
                 _config: import("@trpc/server").RootConfig<{
                     ctx: object;

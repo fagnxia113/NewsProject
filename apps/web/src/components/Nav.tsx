@@ -6,10 +6,8 @@ import {
   NavbarContent,
   NavbarItem,
   Tooltip,
-  Button,
 } from '@nextui-org/react';
 import { ThemeSwitcher } from './ThemeSwitcher';
-import { GitHubIcon } from './GitHubIcon';
 import { useLocation } from 'react-router-dom';
 import { appVersion } from '@web/utils/env';
 import { useEffect, useState } from 'react';
@@ -81,9 +79,9 @@ const Nav = () => {
           <NavbarBrand>
             <Link href="/" className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">WW</span>
+                <span className="text-white font-bold text-sm">N</span>
               </div>
-              <p className="font-bold text-inherit bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">WeWe RSS</p>
+              <p className="font-bold text-inherit bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">News</p>
             </Link>
             <Badge content={isFoundNewVersion ? 'New' : null} color="danger" variant="flat" size="sm" className="ml-2">
               <span className="text-xs text-gray-500">v{appVersion}</span>
@@ -109,20 +107,6 @@ const Nav = () => {
           })}
         </NavbarContent>
         <NavbarContent justify="end">
-          <NavbarItem className="hidden lg:flex">
-            <Tooltip content="GitHub 仓库">
-              <Button
-                isIconOnly
-                as={Link}
-                href="https://github.com/cooderl/wewe-rss"
-                target="_blank"
-                variant="light"
-                className="text-gray-600 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
-              >
-                <GitHubIcon className="w-5 h-5" />
-              </Button>
-            </Tooltip>
-          </NavbarItem>
           <NavbarItem>
             <ThemeSwitcher />
           </NavbarItem>

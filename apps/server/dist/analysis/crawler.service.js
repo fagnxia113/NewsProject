@@ -105,7 +105,7 @@ let CrawlerService = class CrawlerService {
             try {
                 const result = await this.crawlArticleContent(articleId);
                 results.push(result);
-                await this.delay(1000);
+                await this.delay(1000 + Math.random() * 2000);
             }
             catch (error) {
                 this.logger.error(`批量爬取文章内容失败: ${articleId}`, error);
@@ -190,6 +190,7 @@ let CrawlerService = class CrawlerService {
     async fetchArticleContent(url) {
         try {
             this.logger.log(`开始爬取文章内容: ${url}`);
+            await this.delay(500 + Math.random() * 1000);
             const response = await fetch(url, {
                 headers: this.headers,
             });

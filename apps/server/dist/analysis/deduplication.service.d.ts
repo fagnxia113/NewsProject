@@ -11,7 +11,7 @@ export declare class DeduplicationService {
     checkDuplicate(articleId: string): Promise<{
         success: boolean;
         isDuplicate: boolean;
-        duplicateGroupId: string | null;
+        duplicateGroupId: any;
         message: string;
         similarity?: undefined;
         error?: undefined;

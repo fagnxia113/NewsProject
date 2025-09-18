@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import Feeds from './pages/feeds';
 import Login from './pages/login';
-import Accounts from './pages/accounts';
-import AnalysisResults from './pages/analysis/results';
+import Accounts from './pages/accounts/index';
+import AnalysisResults from './pages/analysis/new-results';
 import Settings from './pages/settings';
 import { BaseLayout } from './layouts/base';
 import { TrpcProvider } from './provider/trpc';

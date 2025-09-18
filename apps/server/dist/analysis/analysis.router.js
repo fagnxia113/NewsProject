@@ -260,6 +260,9 @@ const analysisRouter = (0, trpc_1.router)({
                     industry: article.industry,
                     newsType: article.newsType,
                     publishTime: article.publishTime,
+                    isDuplicate: article.isDuplicate,
+                    confidence: article.confidence,
+                    processedTime: article.processedTime,
                 };
             });
             return {
@@ -324,17 +327,27 @@ const analysisRouter = (0, trpc_1.router)({
     }))
         .query(async ({ input }) => {
         try {
+            const task = await prismaService.processingTask.findUnique({
+                where: { id: input.id },
+            });
+            if (!task) {
+                throw new server_1.TRPCError({
+                    code: 'NOT_FOUND',
+                    message: '任务不存在',
+                });
+            }
             return {
-                id: input.id,
-                status: 2,
-                startTime: Math.floor(Date.now() / 1000) - 3600,
-                endTime: Math.floor(Date.now() / 1000),
-                totalArticles: 100,
-                processedArticles: 100,
-                successArticles: 95,
-                failedArticles: 5,
-                splitCount: 10,
-                duplicateCount: 8,
+                id: task.id,
+                status: task.status,
+                startTime: task.startTime,
+                endTime: task.endTime,
+                totalArticles: task.totalArticles,
+                processedArticles: task.processedArticles,
+                successArticles: task.successArticles,
+                failedArticles: task.failedArticles,
+                splitCount: task.splitCount,
+                duplicateCount: task.duplicateCount,
+                filterCount: task.filterCount,
             };
         }
         catch (error) {

@@ -17,15 +17,7 @@ declare const settingsRouter: import("@trpc/server").CreateRouterInner<import("@
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
         _meta: object;
-    }, {
-        id: string;
-        name: string;
-        description: string | null;
-        priority: number;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date | null;
-    }[]>;
+    }, any>;
     createIndustry: import("@trpc/server").BuildProcedure<"mutation", {
         _config: import("@trpc/server").RootConfig<{
             ctx: object;
@@ -49,15 +41,7 @@ declare const settingsRouter: import("@trpc/server").CreateRouterInner<import("@
         };
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
-    }, {
-        id: string;
-        name: string;
-        description: string | null;
-        priority: number;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date | null;
-    }>;
+    }, any>;
     updateIndustry: import("@trpc/server").BuildProcedure<"mutation", {
         _config: import("@trpc/server").RootConfig<{
             ctx: object;
@@ -87,15 +71,7 @@ declare const settingsRouter: import("@trpc/server").CreateRouterInner<import("@
         };
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
-    }, {
-        id: string;
-        name: string;
-        description: string | null;
-        priority: number;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date | null;
-    }>;
+    }, any>;
     deleteIndustry: import("@trpc/server").BuildProcedure<"mutation", {
         _config: import("@trpc/server").RootConfig<{
             ctx: object;
@@ -125,15 +101,7 @@ declare const settingsRouter: import("@trpc/server").CreateRouterInner<import("@
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
         _meta: object;
-    }, {
-        id: string;
-        name: string;
-        description: string | null;
-        priority: number;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date | null;
-    }[]>;
+    }, any>;
     createNewsType: import("@trpc/server").BuildProcedure<"mutation", {
         _config: import("@trpc/server").RootConfig<{
             ctx: object;
@@ -157,15 +125,7 @@ declare const settingsRouter: import("@trpc/server").CreateRouterInner<import("@
         };
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
-    }, {
-        id: string;
-        name: string;
-        description: string | null;
-        priority: number;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date | null;
-    }>;
+    }, any>;
     updateNewsType: import("@trpc/server").BuildProcedure<"mutation", {
         _config: import("@trpc/server").RootConfig<{
             ctx: object;
@@ -195,15 +155,7 @@ declare const settingsRouter: import("@trpc/server").CreateRouterInner<import("@
         };
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
-    }, {
-        id: string;
-        name: string;
-        description: string | null;
-        priority: number;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date | null;
-    }>;
+    }, any>;
     deleteNewsType: import("@trpc/server").BuildProcedure<"mutation", {
         _config: import("@trpc/server").RootConfig<{
             ctx: object;
@@ -233,17 +185,7 @@ declare const settingsRouter: import("@trpc/server").CreateRouterInner<import("@
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
         _meta: object;
-    }, {
-        id: string;
-        model: string;
-        apiKey: string;
-        baseUrl: string | null;
-        maxTokens: number | null;
-        temperature: number | null;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date | null;
-    }[]>;
+    }, any>;
     createLLMConfig: import("@trpc/server").BuildProcedure<"mutation", {
         _config: import("@trpc/server").RootConfig<{
             ctx: object;
@@ -271,17 +213,7 @@ declare const settingsRouter: import("@trpc/server").CreateRouterInner<import("@
         };
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
-    }, {
-        id: string;
-        model: string;
-        apiKey: string;
-        baseUrl: string | null;
-        maxTokens: number | null;
-        temperature: number | null;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date | null;
-    }>;
+    }, any>;
     updateLLMConfig: import("@trpc/server").BuildProcedure<"mutation", {
         _config: import("@trpc/server").RootConfig<{
             ctx: object;
@@ -315,17 +247,7 @@ declare const settingsRouter: import("@trpc/server").CreateRouterInner<import("@
         };
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
-    }, {
-        id: string;
-        model: string;
-        apiKey: string;
-        baseUrl: string | null;
-        maxTokens: number | null;
-        temperature: number | null;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date | null;
-    }>;
+    }, any>;
     deleteLLMConfig: import("@trpc/server").BuildProcedure<"mutation", {
         _config: import("@trpc/server").RootConfig<{
             ctx: object;

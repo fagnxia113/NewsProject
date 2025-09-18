@@ -9,7 +9,7 @@ export class CrawlerService {
   private readonly logger = new Logger(this.constructor.name);
   private readonly baseUrl: string;
   private readonly headers: Record<string, string>;
-
+  
   constructor(
     private readonly prismaService: PrismaService,
     private readonly configService: ConfigService<ConfigurationType>,
@@ -94,7 +94,7 @@ export class CrawlerService {
         results.push(result);
         
         // 添加延迟，避免请求过于频繁
-        await this.delay(1000);
+        await this.delay(1000 + Math.random() * 2000); // 1-3秒随机延迟
       } catch (error) {
         this.logger.error(`批量爬取文章内容失败: ${articleId}`, error);
         results.push({
@@ -203,6 +203,9 @@ export class CrawlerService {
   private async fetchArticleContent(url: string): Promise<string> {
     try {
       this.logger.log(`开始爬取文章内容: ${url}`);
+      
+      // 添加随机延迟，避免请求过于频繁
+      await this.delay(500 + Math.random() * 1000);
       
       // 使用fetch获取网页内容
       const response = await fetch(url, {

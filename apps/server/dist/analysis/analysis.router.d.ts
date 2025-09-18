@@ -114,15 +114,7 @@ declare const analysisRouter: import("@trpc/server").CreateRouterInner<import("@
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
     }, {
-        data: {
-            id: string;
-            title: string;
-            mpName: any;
-            mpCover: any;
-            industry: string | null;
-            newsType: string | null;
-            publishTime: number;
-        }[];
+        data: any;
         total: number;
         page: number;
         pageSize: number;
@@ -167,16 +159,17 @@ declare const analysisRouter: import("@trpc/server").CreateRouterInner<import("@
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
     }, {
-        id: string;
-        status: number;
-        startTime: number;
-        endTime: number;
-        totalArticles: number;
-        processedArticles: number;
-        successArticles: number;
-        failedArticles: number;
-        splitCount: number;
-        duplicateCount: number;
+        id: any;
+        status: any;
+        startTime: any;
+        endTime: any;
+        totalArticles: any;
+        processedArticles: any;
+        successArticles: any;
+        failedArticles: any;
+        splitCount: any;
+        duplicateCount: any;
+        filterCount: any;
     }>;
     getArticle: import("@trpc/server").BuildProcedure<"query", {
         _config: import("@trpc/server").RootConfig<{
@@ -196,15 +189,15 @@ declare const analysisRouter: import("@trpc/server").CreateRouterInner<import("@
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
     }, {
-        id: string;
-        title: string;
-        content: string | null;
-        mpName: string | undefined;
-        mpCover: string | undefined;
-        industry: string | null;
-        newsType: string | null;
-        publishTime: number;
-        isProcessed: boolean;
+        id: any;
+        title: any;
+        content: any;
+        mpName: any;
+        mpCover: any;
+        industry: any;
+        newsType: any;
+        publishTime: any;
+        isProcessed: any;
     }>;
     getArticleAnalysis: import("@trpc/server").BuildProcedure<"query", {
         _config: import("@trpc/server").RootConfig<{

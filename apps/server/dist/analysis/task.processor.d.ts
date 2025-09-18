@@ -5,7 +5,6 @@ export declare class TaskProcessor {
     private readonly prismaService;
     private readonly logger;
     constructor(analysisService: AnalysisService, prismaService: PrismaService);
-    handleCron(): Promise<void>;
     private processBatchArticleTask;
     private performDailyAnalysis;
 }

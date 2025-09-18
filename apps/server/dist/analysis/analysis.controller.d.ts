@@ -22,24 +22,7 @@ export declare class AnalysisController {
     crawlArticle(id: string): Promise<{
         success: boolean;
         message: string;
-        data: {
-            id: string;
-            mpId: string;
-            title: string;
-            content: string | null;
-            picUrl: string;
-            publishTime: number;
-            summary: string | null;
-            industry: string | null;
-            newsType: string | null;
-            confidence: number | null;
-            isDuplicate: boolean;
-            duplicateGroupId: string | null;
-            isProcessed: boolean;
-            processedTime: number | null;
-            createdAt: Date;
-            updatedAt: Date | null;
-        };
+        data: any;
         error?: undefined;
     } | {
         success: boolean;
@@ -66,7 +49,7 @@ export declare class AnalysisController {
     checkDuplicate(id: string): Promise<{
         success: boolean;
         isDuplicate: boolean;
-        duplicateGroupId: string | null;
+        duplicateGroupId: any;
         message: string;
         similarity?: undefined;
         error?: undefined;

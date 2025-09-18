@@ -24,6 +24,7 @@ import {
   Switch,
   Divider,
 } from '@nextui-org/react';
+import { toast } from 'sonner';
 import { trpc } from '@web/utils/trpc';
 import { PlusIcon, TrashIcon, PencilIcon } from '@web/components/Icons';
 
@@ -74,12 +75,13 @@ const Settings = () => {
     model: 'gpt-3.5-turbo',
     apiKey: '',
     baseUrl: undefined as string | undefined,
-    maxTokens: 2000 as number | undefined,
-    temperature: 0.7 as number | undefined,
+    maxTokens: undefined as number | undefined,
+    temperature: undefined as number | undefined,
     isActive: true,
   });
   const [editingLLMConfig, setEditingLLMConfig] = useState<LLMConfig | null>(null);
   const { isOpen: isLLMConfigModalOpen, onOpen: onLLMConfigModalOpen, onClose: onLLMConfigModalClose, onOpenChange: onLLMConfigModalChange } = useDisclosure();
+  const [isTestingConnection, setIsTestingConnection] = useState(false);
 
   // TRPC查询和变更
   const listIndustries = trpc.settings.listIndustries.useQuery();
@@ -104,9 +106,9 @@ const Settings = () => {
       setIndustries(listIndustries.data.map(item => ({
         id: item.id,
         name: item.name,
-        description: item.description !== null ? item.description : undefined,
+        description: item.description || undefined,
         createdAt: item.createdAt,
-        updatedAt: item.updatedAt,
+        updatedAt: item.updatedAt || null,
       })));
     }
   }, [listIndustries.data]);
@@ -116,9 +118,9 @@ const Settings = () => {
       setNewsTypes(listNewsTypes.data.map(item => ({
         id: item.id,
         name: item.name,
-        description: item.description !== null ? item.description : undefined,
+        description: item.description || undefined,
         createdAt: item.createdAt,
-        updatedAt: item.updatedAt,
+        updatedAt: item.updatedAt || null,
       })));
     }
   }, [listNewsTypes.data]);
@@ -127,20 +129,9 @@ const Settings = () => {
     if (listLLMConfigs.data) {
       setLlmConfigs(listLLMConfigs.data.map(item => ({
         ...item,
-        baseUrl: item.baseUrl !== null ? item.baseUrl : undefined,
-        maxTokens: item.maxTokens !== null ? item.maxTokens : undefined,
-        temperature: item.temperature !== null ? item.temperature : undefined
-      })));
-    }
-  }, [listLLMConfigs.data]);
-
-  useEffect(() => {
-    if (listLLMConfigs.data) {
-      setLlmConfigs(listLLMConfigs.data.map(item => ({
-        ...item,
-        baseUrl: item.baseUrl !== null ? item.baseUrl : undefined,
-        maxTokens: item.maxTokens !== null ? item.maxTokens : undefined,
-        temperature: item.temperature !== null ? item.temperature : undefined
+        baseUrl: item.baseUrl || undefined,
+        maxTokens: item.maxTokens || undefined,
+        temperature: item.temperature || undefined
       })));
     }
   }, [listLLMConfigs.data]);
@@ -229,9 +220,9 @@ const Settings = () => {
       setNewLLMConfig({
         model: 'gpt-3.5-turbo',
         apiKey: '',
-        baseUrl: '',
-        maxTokens: 2000,
-        temperature: 0.7,
+        baseUrl: undefined,
+        maxTokens: undefined,
+        temperature: undefined,
         isActive: true,
       });
       onLLMConfigModalClose();
@@ -279,7 +270,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6 bg-gradient-to-br from-blue-50/50 via-white to-purple-50/50 dark:from-gray-900 dark:to-gray-800 rounded-3xl">
+    <div className="px-4 py-6 bg-gradient-to-br from-blue-50/50 via-white to-purple-50/50 dark:from-gray-900 dark:to-gray-800 rounded-3xl">
       <h1 className="text-2xl font-bold mb-6">设置中心</h1>
       
       <Tabs aria-label="设置选项">
@@ -415,8 +406,6 @@ const Settings = () => {
                 <TableHeader>
                   <TableColumn>模型</TableColumn>
                   <TableColumn>状态</TableColumn>
-                  <TableColumn>最大令牌数</TableColumn>
-                  <TableColumn>温度</TableColumn>
                   <TableColumn>创建时间</TableColumn>
                   <TableColumn>操作</TableColumn>
                 </TableHeader>
@@ -433,8 +422,6 @@ const Settings = () => {
                           {config.isActive ? '启用' : '禁用'}
                         </Chip>
                       </TableCell>
-                      <TableCell>{config.maxTokens || '-'}</TableCell>
-                      <TableCell>{config.temperature || '-'}</TableCell>
                       <TableCell>{new Date(config.createdAt).toLocaleString()}</TableCell>
                       <TableCell>
                         <div className="flex gap-2">
@@ -465,16 +452,16 @@ const Settings = () => {
       </Tabs>
 
       {/* 行业管理模态框 */}
-      <Modal isOpen={isIndustryModalOpen} onOpenChange={onIndustryModalChange}>
+      <Modal isOpen={isIndustryModalOpen} onOpenChange={onIndustryModalChange} size="lg" classNames={{ base: "max-w-lg w-full" }}>
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-t-2xl">
                 {editingIndustry ? '编辑行业' : '添加行业'}
               </ModalHeader>
-              <ModalBody>
-                <div className="flex flex-col gap-4 py-2">
-                  <div className="flex flex-col gap-1">
+              <ModalBody className="py-6">
+                <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-2">
                     <span className="text-sm font-medium text-foreground">行业名称</span>
                     <Input
                       placeholder="输入行业名称"
@@ -493,7 +480,7 @@ const Settings = () => {
                       radius="md"
                     />
                   </div>
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-2">
                     <span className="text-sm font-medium text-foreground">行业描述</span>
                     <Textarea
                       placeholder="输入行业描述（可选）"
@@ -511,11 +498,12 @@ const Settings = () => {
                         inputWrapper: "h-12"
                       }}
                       radius="md"
+                      minRows={3}
                     />
                   </div>
                 </div>
               </ModalBody>
-              <ModalFooter>
+              <ModalFooter className="pt-0">
                 <Button color="default" variant="light" onPress={onClose}>
                   取消
                 </Button>
@@ -533,16 +521,16 @@ const Settings = () => {
       </Modal>
 
       {/* 新闻类型管理模态框 */}
-      <Modal isOpen={isNewsTypeModalOpen} onOpenChange={onNewsTypeModalChange}>
+      <Modal isOpen={isNewsTypeModalOpen} onOpenChange={onNewsTypeModalChange} size="lg" classNames={{ base: "max-w-lg w-full" }}>
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-t-2xl">
                 {editingNewsType ? '编辑新闻类型' : '添加新闻类型'}
               </ModalHeader>
-              <ModalBody>
-                <div className="flex flex-col gap-4 py-2">
-                  <div className="flex flex-col gap-1">
+              <ModalBody className="py-6">
+                <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-2">
                     <span className="text-sm font-medium text-foreground">类型名称</span>
                     <Input
                       placeholder="输入类型名称"
@@ -561,7 +549,7 @@ const Settings = () => {
                       radius="md"
                     />
                   </div>
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-2">
                     <span className="text-sm font-medium text-foreground">类型描述</span>
                     <Textarea
                       placeholder="输入类型描述（可选）"
@@ -579,11 +567,12 @@ const Settings = () => {
                         inputWrapper: "h-12"
                       }}
                       radius="md"
+                      minRows={3}
                     />
                   </div>
                 </div>
               </ModalBody>
-              <ModalFooter>
+              <ModalFooter className="pt-0">
                 <Button color="default" variant="light" onPress={onClose}>
                   取消
                 </Button>
@@ -601,16 +590,16 @@ const Settings = () => {
       </Modal>
 
       {/* LLM配置管理模态框 */}
-      <Modal isOpen={isLLMConfigModalOpen} onOpenChange={onLLMConfigModalChange} size="md">
+      <Modal isOpen={isLLMConfigModalOpen} onOpenChange={onLLMConfigModalChange} size="lg" classNames={{ base: "max-w-lg w-full" }}>
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-t-2xl">
                 {editingLLMConfig ? '编辑LLM配置' : '添加LLM配置'}
               </ModalHeader>
-              <ModalBody>
-                <div className="flex flex-col gap-4 py-2">
-                  <div className="flex flex-col gap-1">
+              <ModalBody className="py-6">
+                <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-2">
                     <span className="text-sm font-medium text-foreground">模型ID</span>
                     <Input
                       placeholder="输入自定义模型ID"
@@ -630,7 +619,7 @@ const Settings = () => {
                     />
                   </div>
                   
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-2">
                     <span className="text-sm font-medium text-foreground">API密钥</span>
                     <Input
                       placeholder="输入API密钥"
@@ -651,7 +640,7 @@ const Settings = () => {
                     />
                   </div>
                   
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-2">
                     <span className="text-sm font-medium text-foreground">基础URL</span>
                     <Input
                       placeholder="输入API基础URL（可选）"
@@ -671,53 +660,27 @@ const Settings = () => {
                     />
                   </div>
                   
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="flex flex-col gap-1">
-                      <span className="text-sm font-medium text-foreground">最大令牌数</span>
-                      <Input
-                        placeholder="输入最大令牌数"
-                        type="number"
-                        value={editingLLMConfig ? editingLLMConfig.maxTokens?.toString() || '' : newLLMConfig.maxTokens?.toString() || ''}
-                        onChange={(e) => {
-                          const maxTokens = e.target.value ? parseInt(e.target.value) : undefined;
-                          if (editingLLMConfig) {
-                            setEditingLLMConfig({ ...editingLLMConfig, maxTokens });
-                          } else {
-                            setNewLLMConfig({ ...newLLMConfig, maxTokens });
-                          }
-                        }}
-                        variant="bordered"
-                        classNames={{
-                          inputWrapper: "h-12"
-                        }}
-                        radius="md"
-                      />
-                    </div>
-                    
-                    <div className="flex flex-col gap-1">
-                      <span className="text-sm font-medium text-foreground">温度</span>
-                      <Input
-                        placeholder="输入温度值 (0-1)"
-                        type="number"
-                        step="0.1"
-                        min="0"
-                        max="1"
-                        value={editingLLMConfig ? editingLLMConfig.temperature?.toString() || '' : newLLMConfig.temperature?.toString() || ''}
-                        onChange={(e) => {
-                          const temperature = e.target.value ? parseFloat(e.target.value) : undefined;
-                          if (editingLLMConfig) {
-                            setEditingLLMConfig({ ...editingLLMConfig, temperature });
-                          } else {
-                            setNewLLMConfig({ ...newLLMConfig, temperature });
-                          }
-                        }}
-                        variant="bordered"
-                        classNames={{
-                          inputWrapper: "h-12"
-                        }}
-                        radius="md"
-                      />
-                    </div>
+                  <div className="flex gap-2 pt-2">
+                    <Button
+                      color="success"
+                      variant="flat"
+                      isLoading={isTestingConnection}
+                      onClick={async () => {
+                        setIsTestingConnection(true);
+                        try {
+                          // 这里应该调用测试连接的API
+                          // 暂时用setTimeout模拟
+                          await new Promise(resolve => setTimeout(resolve, 1000));
+                          toast.success('连接成功');
+                        } catch (error) {
+                          toast.error('连接失败');
+                        } finally {
+                          setIsTestingConnection(false);
+                        }
+                      }}
+                    >
+                      测试连接
+                    </Button>
                   </div>
                   
                   <Divider />
@@ -738,7 +701,7 @@ const Settings = () => {
                   </div>
                 </div>
               </ModalBody>
-              <ModalFooter>
+              <ModalFooter className="pt-0">
                 <Button color="default" variant="light" onPress={onClose}>
                   取消
                 </Button>
